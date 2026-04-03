@@ -134,13 +134,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download all artifacts
+      - name: Download Linux amd64
         uses: actions/download-artifact@v4
         with:
+          name: strobes-shell-agent-linux-amd64
+          path: artifacts/
+
+      - name: Download Linux arm64
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: strobes-shell-agent-linux-arm64
+          path: artifacts/
+
+      - name: Download macOS arm64
+        uses: actions/download-artifact@v4
+        with:
+          name: strobes-shell-agent-macos-arm64
+          path: artifacts/
+
+      - name: Download Windows amd64
+        uses: actions/download-artifact@v4
+        with:
+          name: strobes-shell-agent-windows-amd64.exe
           path: artifacts/
 
       - name: List downloaded artifacts
-        run: find artifacts/ -type f
+        run: ls -la artifacts/
 
       - name: Extract version from tag
         id: version
