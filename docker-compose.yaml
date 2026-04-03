@@ -1,0 +1,13 @@
+services:
+  shell-agent:
+    build: .
+    image: strobes/shell-agent:latest
+    container_name: strobes-shell-agent
+    env_file:
+      - .env
+    volumes:
+      # Mount host workspace into container
+      - ./workspace:/workspace
+    restart: unless-stopped
+    # Override CMD if you need extra flags
+    # command: ["connect", "--verbose"]
